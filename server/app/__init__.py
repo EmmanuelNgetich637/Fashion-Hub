@@ -3,19 +3,10 @@ from .config import Config
 from .extensions import db, ma, jwt, migrate
 from .routes.auth_routes import auth_bp
 from .routes.product_routes import product_bp
-from .routes.order_routes import order_bp
-from flask_cors import CORS
+from .routes.order_routes import order_bp 
 
 def create_app(): 
-    app = Flask(__name__)
-
-    # ✅ Correct and only CORS setup
-    CORS(
-        app,
-        supports_credentials=True,
-        origins=["http://localhost:3000"],
-        allow_headers=["Content-Type", "Authorization"]
-    )
+    app = Flask(__name__) 
 
     # Config
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
