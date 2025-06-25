@@ -1,9 +1,24 @@
 "use client"
 
+import React, { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { ShoppingBag, Star, Truck, Shield } from "lucide-react"
+import api from "../services/api"
 
 export function HomePage() {
+  const [products, setProducts] = useState([])
+
+  useEffect(() => {
+    api.get("/products")
+      .then((res) => {
+        console.log("✅ Connected to backend. Products:", res.data)
+        setProducts(res.data)
+      })
+      .catch((err) => {
+        console.error("❌ Backend connection failed:", err.message)
+      })
+  }, [])
+
   const features = [
     {
       icon: <ShoppingBag className="h-8 w-8" style={{ color: "var(--color-grey-600)" }} />,
