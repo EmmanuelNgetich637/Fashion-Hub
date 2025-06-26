@@ -1,8 +1,9 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, jsonify, request
+from flask_jwt_extended import jwt_required
+
+from server.extensions import db
 from server.models.product import Product
 from server.schemas.product_schema import product_schema, products_schema
-from server.extensions import db
-from flask_jwt_extended import jwt_required
 
 product_bp = Blueprint('products', __name__, url_prefix='/products')
 

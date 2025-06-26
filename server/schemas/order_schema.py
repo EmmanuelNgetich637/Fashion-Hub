@@ -1,6 +1,7 @@
 from server.extensions import ma
 from server.models.order import Order
 
+
 class OrderSchema(ma.SQLAlchemySchema):
     class Meta:
         model = Order

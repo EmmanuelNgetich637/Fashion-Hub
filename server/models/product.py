@@ -1,5 +1,6 @@
 from server.extensions import db
 
+
 class Product(db.Model):
     __tablename__ = 'products'
 

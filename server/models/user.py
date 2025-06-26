@@ -1,6 +1,8 @@
 from datetime import datetime
+
 from server.extensions import db
 from server.models.order import Order
+
 
 class User(db.Model):
     __tablename__ = 'users'

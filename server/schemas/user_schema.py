@@ -1,5 +1,7 @@
-from server.extensions import ma
 from marshmallow import fields
+
+from server.extensions import ma
+
 
 class UserSchema(ma.Schema):
     id = fields.Int(dump_only=True)

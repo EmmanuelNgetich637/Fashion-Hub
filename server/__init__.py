@@ -1,10 +1,12 @@
 # server/__init__.py
 from flask import Flask
+
 from server.config import Config
-from server.extensions import db, ma, jwt, migrate
+from server.extensions import db, jwt, ma, migrate
 from server.routes.auth_routes import auth_bp
-from server.routes.product_routes import product_bp
 from server.routes.order_routes import order_bp
+from server.routes.product_routes import product_bp
+
 
 def create_app(): 
     app = Flask(__name__) 
