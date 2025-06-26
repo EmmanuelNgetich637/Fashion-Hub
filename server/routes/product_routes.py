@@ -10,7 +10,7 @@ product_bp = Blueprint('products', __name__, url_prefix='/products')
 @product_bp.route('/', methods=['GET'])
 def get_products():
     products = Product.query.all()
-    return products_schema.jsonify(products)
+    return jsonify(products_schema.dump(products)), 200
 
 @product_bp.route('/', methods=['POST'])
 @jwt_required()
