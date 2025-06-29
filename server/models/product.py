@@ -9,4 +9,4 @@ class Product(db.Model):
     price = db.Column(db.Float, nullable=False)
     description = db.Column(db.Text)
     stock = db.Column(db.Integer, default=0)
-    image_url = db.Column(db.String, nullable=True)  # ✅ New field
+    image_url = db.Column(db.String, nullable=True)  
