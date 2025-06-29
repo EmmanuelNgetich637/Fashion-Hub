@@ -2,7 +2,7 @@ import api from '././api';
 import { User } from '././types';
 
 export async function register(name: string, email: string, password: string): Promise<User> {
-  const response = await api.post<User>('/auth/register', { name, email, password });
+  const response = await api.post<User>('/auth/register', { username: name, email, password });
   return response.data;
 }
 
