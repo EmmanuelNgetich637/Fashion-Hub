@@ -2,13 +2,12 @@ from faker import Faker
 from server.run import create_app
 from server.extensions import db
 from server.models.product import Product
-
-import random
+import random 
 
 fake = Faker()
 app = create_app()
 
-# Curated fashion product names and corresponding Unsplash images
+# Valid Unsplash image links (direct photo URLs only)
 fashion_items = [
     {
         "name": "Graphic T-Shirt",
@@ -36,7 +35,7 @@ fashion_items = [
     },
     {
         "name": "Wool Coat",
-        "image_url": "https://unsplash.com/photos/a-red-jacket-hanging-on-a-clothes-line-L7MBmE1VbVg"
+        "image_url": "https://images.unsplash.com/photo-1573497169025-738b6b8d8bfb"
     },
     {
         "name": "Chino Pants",
@@ -54,23 +53,21 @@ fashion_items = [
 
 with app.app_context():
     print("🔁 Seeding fashion products with realistic data...")
-
-    # Drop and recreate Product table (manual migration-like behavior)
+ 
     db.drop_all()
     db.create_all()
 
-    # Seed fashion products
-    products = []
+    products = [] 
     for item in fashion_items:
         product = Product(
             name=item["name"],
             price=round(random.uniform(19.99, 129.99), 2),
             description=fake.sentence(nb_words=8),
             stock=random.randint(5, 100),
-            image_url=item["image_url"] + "?w=300&h=300&fit=crop"
+            image_url=item["image_url"] + "?w=300&h=300&fit=crop&auto=format&fm=jpg"
         )
         products.append(product)
 
-    db.session.add_all(products) 
+    db.session.add_all(products)
     db.session.commit()
-    print("✅ Done seeding with fashion images and names!")
+    print("✅ Done seeding with valid Unsplash images and product names!")
