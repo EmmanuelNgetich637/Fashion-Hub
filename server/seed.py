@@ -19,9 +19,10 @@ with app.app_context():
             name=fake.word().capitalize() + " " + fake.word().capitalize(),
             price=round(fake.random_number(digits=4) / 100, 2),
             description=fake.sentence(nb_words=6),
-            stock=fake.random_int(min=1, max=50)
+            stock=fake.random_int(min=1, max=50),
+            image_url=f"https://picsum.photos/seed/{fake.uuid4()}/300/300"  # ✅ added image_url
         )
-        products.append(product)  
+        products.append(product)
 
     # Add and commit
     db.session.add_all(products)
