@@ -21,8 +21,8 @@ export function ShopPage() {
       .then((data) => {
         const mapped = data.map((item: any) => ({
           id: item.id,
-          name: item.description || "Fashion Item",
-          price: Math.floor(Math.random() * 80 + 30),
+          name: item.name,
+          price: item.price,
           image: item.image_url || "/placeholder.svg",
           category: "Fashion",
           description: item.description || "Stylish fashion piece from Unsplash",
