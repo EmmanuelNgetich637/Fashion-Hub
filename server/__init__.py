@@ -1,6 +1,6 @@
 # server/__init__.py
 from flask import Flask
-
+from server.routes.api import api
 from server.config import Config
 from server.extensions import db, jwt, ma, migrate
 from server.routes.auth_routes import auth_bp
@@ -26,6 +26,8 @@ def create_app():
     app.register_blueprint(auth_bp)
     app.register_blueprint(product_bp)
     app.register_blueprint(order_bp, url_prefix='/orders')
+    app.register_blueprint(api, url_prefix="/api")
+
  
     @app.route('/')
     def home():

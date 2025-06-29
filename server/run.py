@@ -1,6 +1,5 @@
 from flask_cors import CORS
-from server import create_app
-from server.routes.api import api
+from server import create_app 
  
 app = create_app()
 

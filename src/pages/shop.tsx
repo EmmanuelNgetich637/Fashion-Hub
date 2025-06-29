@@ -23,7 +23,7 @@ export function ShopPage() {
           id: item.id,
           name: item.description || "Fashion Item",
           price: Math.floor(Math.random() * 80 + 30),
-          image: item.url || "/placeholder.svg",
+          image: item.image_url || "/placeholder.svg",
           category: "Fashion",
           description: item.description || "Stylish fashion piece from Unsplash",
           photographer: item.photographer,
