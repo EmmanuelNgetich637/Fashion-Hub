@@ -21,6 +21,10 @@ def register():
     # Check for existing user
     if User.query.filter((User.username == data['username']) | (User.email == data['email'])).first():
         return jsonify({"error": "Username or email already exists"}), 400
+    
+    print("Incoming registration data:", data)
+    print("Validation errors:", user_schema.validate(data))
+
 
     # Hash password
     hashed_pw = hash_password(data['password'])
@@ -47,18 +51,17 @@ def register():
 @auth_bp.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
-    username_or_email = data.get('username') or data.get('email')
+    email = data.get('email')
     password = data.get('password')
 
-    user = User.query.filter(
-        (User.username == username_or_email) | 
-        (User.email == username_or_email)
-    ).first()
+    if not email or not password:
+        return jsonify({"error": "Email and password required"}), 400
+
+    user = User.query.filter_by(email=email).first()
 
     if not user or not verify_password(password, user.password_hash):
         return jsonify({"error": "Invalid credentials"}), 401
-
-    # Fix: use string for identity
+ 
     token = create_access_token(identity=str(user.id))
 
     return jsonify({
