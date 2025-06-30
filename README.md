@@ -1,78 +1,137 @@
-#  Fashion Hub
+#  Fashion Hub
 
-Fashion Hub is a full-stack web application for managing and browsing fashion products. It includes user authentication, product listings, and order management, built using **Flask** for the backend and **React** for the frontend.
+Fashion Hub is a full-stack web application built to showcase and sell fashion items using a modern tech stack. This project meets all the requirements for the SDFT14 Phase 4 MVP, including a single-page React client with protected routes and a Flask REST API backend with relational database models.
 
 ---
 
-##  Project Structure
+##  Features
 
-Fashion-Hub/
-│
-├── server/ 
-│ ├── models/ 
-│ ├── routes/ 
-│ ├── schemas/ 
-│ ├── extensions.py 
-│ ├── config.py 
-│ ├── seed.py 
-│ └── init.py 
-│
-├── src/ 
-│ └──
-│
-├── instance/db.sqlite3 
-├── migrations/ r
-├── requirements.txt 
-├── package.json 
-└── README.md 
+### Frontend (React)
 
-##  Features
+* **Single Page Application (SPA)** using **React**
+* **8+ Routes** implemented:
 
--  **User Authentication** (JWT-based)
--  **Products API**: CRUD operations for fashion items
--  **Orders API**: Link users to their purchases
--  **Schema Validation** using Marshmallow
--  **CORS** setup for frontend-backend communication
--  **Database Seeding** with Faker
+  * `/` – Home
+  * `/login` – User Login
+  * `/register` – User Registration
+  * `/shop` – View Fashion Items
+  * `/product/:id` – Product Details
+  * `/cart` – Shopping Cart
+  * `/orders` – User Orders
+  * `/dashboard` – Admin/User Dashboard
+* **5 Protected Routes** (require authentication):
 
-### Backend Setup(Flask)
+  * `/cart`, `/orders`, `/dashboard`, `/product/:id`, `/checkout`
+* **Forgot Password** feature (email-based or token reset)
+
+---
+
+###  Backend (Flask REST API)
+
+* Built with **Flask** and **Flask-RESTful**
+* **8+ RESTful endpoints**, including:
+
+  * `POST /register` – Register user
+  * `POST /login` – Authenticate user
+  * `GET /products` – List products
+  * `GET /products/<id>` – Product details
+  * `POST /orders` – Create order
+  * `PUT /users/<id>` – Update user
+  * `DELETE /cart/<id>` – Delete cart item
+  * `PATCH /products/<id>` – Edit product
+* **5+ Authenticated Endpoints**:
+
+  * Requires JWT tokens for access (protected using Flask-JWT or Flask-JWT-Extended)
+
+---
+
+##  Database Schema
+
+* **4+ Models**, each with 4+ fields:
+
+  * `User`: id, name, email, password, is\_admin
+  * `Product`: id, name, price, image, description, category
+  * `Order`: id, user\_id, created\_at, status
+  * `CartItem`: id, product\_id, user\_id, quantity
+
+###  Relationships
+
+* **Two One-to-Many**:
+
+  * User → Orders
+  * User → CartItems
+* **One Many-to-Many**:
+
+  * Orders ↔ Products (via `OrderItems` table)
+
+---
+
+##  Authentication & Security
+
+* JWT-based auth for frontend-backend communication
+* Password reset flow with secure token/email
+* Protected API endpoints for authenticated users only
+
+---
+
+## Technologies Used
+
+| Frontend     | Backend       | Database            |
+| ------------ | ------------- | ------------------- |
+| React (Vite) | Flask         | SQLite / PostgreSQL |
+| React Router | Flask-JWT     | SQLAlchemy          |
+| Tailwind CSS | Flask-Migrate | Alembic             |
+| Context API  | Flask-RESTful |                     |
+
+---
+
+##  Image Integration
+
+* Images dynamically fetched from **Unsplash API**
+* Unsplash Access Key securely stored in environment variables
+
+---
+
+## Getting Started
+
+### Backend
 
 ```bash
-# Create Virtual environment
-python3 -m venv venv
+cd backend
+python -m venv venv
 source venv/bin/activate
-
-# Install dependencies
 pip install -r requirements.txt
+flask run
+```
 
-# Run migrations
-flask db init
-flask db migrate -m "Initial"
-flask db upgrade
+### Frontend
 
-# Seed database
-python3 -m server.seed
-
-# Run server
-PYTHONPATH=. python3 server/run.py
-
-#Frontend Setup
-cd src
+```bash
+cd frontend
 npm install
-npm start
+npm run dev
+```
 
-## Authentication
-Authentication is handled via JWT:
--Login/Register to recieve a JWT token
--Protected routes: /orders/,product POST/PUT/DELETE
--Use Authorization: Bearer <token> in protected routes
+ENVIRONMENT VARIABLES
 
-## Contribution
-- Backend handled by Emmanuel 
-- Frontend handles by Brigid
+Frontend .env 
 
+REACT\_UNSPLASH\_ACCESS\_KEY=your\_unsplash\_access\_key
 
+REACT\_API\_URL=http\://localhost:5000
 
+Backend .env 
 
+DATABASE\_URI=sqlite:///db.sqlite3
 
+JWT\_SECRET\_KEY=your\_jwt\_secret\_key
 
+UNSPLASH\_ACCESS\_KEY=your\_unsplash\_access\_key
+
+UNSPLASH\_SECRET\_KEY=your\_unsplash\_secret\_key
+
+CONTRIBUTORS 
+
+Brigid Syondie - Frontend 
+
+Emmanuel Ngetich - Backend 
