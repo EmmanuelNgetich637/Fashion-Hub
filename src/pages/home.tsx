@@ -6,7 +6,7 @@ import { ShoppingBag, Star, Truck, Shield } from "lucide-react"
 import api from "../services/api"
 
 export function HomePage() {
-  const [products, setProducts] = useState([])
+  const [, setProducts] = useState([])
 
   useEffect(() => {
     api.get("/products")
