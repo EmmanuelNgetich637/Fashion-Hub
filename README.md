@@ -112,26 +112,55 @@ npm install
 npm run dev
 ```
 
-ENVIRONMENT VARIABLES
+### Environment Variables
 
-Frontend .env 
+#### Frontend `.env`
 
-REACT\_UNSPLASH\_ACCESS\_KEY=your\_unsplash\_access\_key
+```env
+REACT_APP_UNSPLASH_ACCESS_KEY=your_unsplash_access_key
+REACT_APP_API_URL=http://localhost:5000
+```
 
-REACT\_API\_URL=http\://localhost:5000
+#### Backend `.env`
 
-Backend .env 
+```env
+DATABASE_URI=sqlite:///db.sqlite3
+JWT_SECRET_KEY=your_jwt_secret_key
+UNSPLASH_ACCESS_KEY=your_unsplash_access_key
+UNSPLASH_SECRET_KEY=your_unsplash_secret_key
+```
 
-DATABASE\_URI=sqlite:///db.sqlite3
+---
 
-JWT\_SECRET\_KEY=your\_jwt\_secret\_key
+##  Deployment on Render
 
-UNSPLASH\_ACCESS\_KEY=your\_unsplash\_access\_key
+### 🔹 Deploy Flask Backend
 
-UNSPLASH\_SECRET\_KEY=your\_unsplash\_secret\_key
+1. Push your backend code to GitHub.
+2. Go to [https://render.com](https://render.com) and log in.
+3. Click "New +" → Web Service.
+4. Connect your repo and select the backend repo.
+5. Set environment:
 
-CONTRIBUTORS 
+   * **Build Command**: `pip install -r requirements.txt`
+   * **Start Command**: `gunicorn app:app`
+   * **Environment Variables**: Add all backend `.env` keys
+6. Click Create Service.
 
-Brigid Syondie - Frontend 
+### 🔹 Deploy React Frontend
 
-Emmanuel Ngetich - Backend 
+1. Push your frontend code to GitHub.
+2. Create another Web Service.
+3. Set:
+
+   * **Build Command**: `npm install && npm run build`
+   * **Start Command**: `serve -s dist`
+   * **Environment Variables**: Add frontend `.env` keys (especially REACT\_APP\_API\_URL)
+4. Click Create Service.
+
+---
+
+## Contributors
+
+Brigid Syondie – Frontend
+Emmanuel Ngetich – Backend
